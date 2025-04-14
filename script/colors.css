@@ -1,0 +1,10 @@
+:root {
+    --cor-fundo: #2e3b2f;       /* Verde acinzentado - fundo suave */
+    --cor-grade: #3f4d40;       /* Verde mais escuro - grade/borda */
+    --cor-cobra: #00e676;       /* Verde neon suave - corpo da cobra */
+    --cor-cabeca: #00b248;      /* Verde forte - cabeça da cobra */
+    --cor-fruta: #ff7043;       /* Laranja vibrante - fruta */
+    --cor-texto: #f1f8e9;       /* Verde clarinho quase branco - texto */
+    --cor-destaque: #ffee58;    /* Amarelo claro - alertas/destaques */
+  }
+  
