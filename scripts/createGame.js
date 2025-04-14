@@ -140,3 +140,40 @@ function startGame(){
         move()
     }, gameSpeed);
 }
+
+function handleKeyPress(event){
+    let name = document.querySelector(".inputName")
+    if(name.value == ""){
+        name.focus()
+    } else {
+        if (!gameStarted && event.code === 'Space'||
+            !gameStarted && event.key === ""
+        ) {
+            startGame()    
+        } else {
+            switch (event.key) {
+                case "ArrowUp":
+                    if(direction != "down"){ 
+                        direction = "up" 
+                    }
+                    break;
+                case "ArrowDown":
+                    if(direction != "up"){ 
+                        direction = "down" 
+                    }
+                    break;
+                case "ArrowRight":
+                    if(direction != "left"){
+                        direction = "right"
+                    }
+                    break;
+                case "ArrowLeft":
+                    if(direction != "right"){
+                        direction = "left"
+                    }
+                    break;
+            }
+        }
+    }
+
+}
