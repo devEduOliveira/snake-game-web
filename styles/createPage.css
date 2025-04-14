@@ -237,3 +237,85 @@
     opacity: 0;
 
 }
+
+.modal{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    content: "";
+    background-color: rgba(0, 0, 0, 0.795); 
+
+    &::after{
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        z-index: 2;
+    }
+
+    .modalHelp{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        transform: translate(-50%, -50%);
+        background-color: var(--cor-fundo);
+        box-shadow: 
+                rgba(63, 63, 63, 0.25) 0px 30px 100px,
+                rgba(63, 63, 63, 0.25) 0px -30px 100px,
+                rgba(63, 63, 63, 0.25) 30px 0px 100px,
+                rgba(63, 63, 63, 0.25) -30px 0px 100px;
+        width: 500px;
+        height: 700px;
+        border-radius: 29px;
+        border: 10px solid var(--cor-grade);
+        padding: 0 20px;
+
+        .modalRules{
+            font-size: 28px;
+            color: var(--cor-texto);
+        }
+
+        .modalTitle{
+            font-size: 40px;
+            color: var(--cor-texto);
+            text-align: center;
+
+            padding: 20px 0;
+
+            border-bottom: 5px solid var(--cor-grade);
+        }
+        .closeModal{
+            position: absolute;
+            top: 20px;
+            right: 20px;
+
+            padding: 0 16px;
+            color: var(--cor-texto);
+            font-size: 32px;
+            font-weight: bold;
+            background-color: transparent;
+            transition: .2s all linear;
+
+            &:hover{
+                color: var(--cor-destaque);
+
+            }
+        }
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+      transform: scale(1.0);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+  
+  .elemento-animado {
+    animation: pulse 0.5s ease-in-out infinite;
+}
