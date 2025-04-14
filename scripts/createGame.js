@@ -204,3 +204,42 @@ function checkCollision(){
         }
     }
 }
+
+function resetGame(){
+    updateHighScore()
+    stopGame();
+    snake = [{x: 10, y: 10}];
+    food = generateFood();
+    direction = 'right';
+    updateScore();
+}
+
+function updateScore(){
+    const currentScore = snake.length - 1;    
+    score.textContent = currentScore.toString().padStart(3, "0");
+}
+
+function stopGame(){    
+    gameOver.classList.toggle("disable", false)
+    disableKeyDown()
+
+    setTimeout(() => {
+        score.classList.toggle("rgb-text", false)
+
+        gameOver.classList.toggle("disable", true)
+        scoreLabel.classList.toggle('disable', true)
+        score.classList.toggle('disable', true)
+        inputName.classList.toggle('disable', false)
+        startPage.classList.toggle('disable', false)
+        ranking.classList.toggle('disable', false)
+        rules.classList.toggle('disable', false)
+        activeKeyDown()
+    }, 3000);
+
+    gameSpeed = 200
+    clearInterval(gameInterval)
+    gameStarted = false;
+    countEsterEgg = 0
+    console.log(eatApple);
+    
+}
