@@ -17,6 +17,9 @@ let direction = ""
 let gameInterval
 let gameSpeed = 200
 let gameStarted = false;
+let highScore = 0
+let eatApple = 0
+let eatGoldenApple = 0
 
 function createElement(tag, className){
     let element = document.createElement(tag);
@@ -28,6 +31,7 @@ function draw(){
     gameBoard.innerHTML = ``
     drawSnake()
     drawFood()
+    updateScore()
 }
 
 function drawSnake(){
@@ -65,7 +69,7 @@ function generateFood() {
     let valid = false;
 
     while (!valid) {
-        x = Math.floor(Math.random() * gridSize) + 1; 
+        x = Math.floor(Math.random() * gridSize) + 1; // ou o tamanho do grid que você usa
         y = Math.floor(Math.random() * gridSize) + 1;
 
         valid = !snake.some(segment => segment.x === x && segment.y === y);
@@ -242,4 +246,54 @@ function stopGame(){
     countEsterEgg = 0
     console.log(eatApple);
     
+}
+
+function updateHighScore(){
+    let currentScore = snake.length - 1;
+    let name = document.querySelector(".inputName").value
+    document.querySelector(".gameOverTitle").innerText = `Score: ${currentScore}`
+
+    if(currentScore > 1){
+        addPlayerInScore(name, currentScore)
+        showRanking()
+    }
+}
+
+function addPlayerInScore(player, score){
+    let ranking = loadLocalStorage();
+    ranking.push({name: player, score})
+    ranking.sort((a, b) => b.score - a.score);
+    saveInLocalStorage(ranking)
+}
+
+function showRanking(){
+    const table = document.querySelector(".scoreRankTable")
+    table.innerHTML = `
+                <tr>
+                    <th id="rank"></th>
+                    <th id="name">Name</th>
+                    <th id="score">Score</th>
+                </tr>
+            
+            `
+    const ranking = loadLocalStorage();
+    const top3 = ranking.slice(0, 5);
+    top3.forEach((player, index) => {
+        table.innerHTML += `
+            <tr>
+                <th id="rank">${index +1}</th>
+                <th id="name">${player.name}</th>
+                <th id="score">${player.score}</th>
+            </tr>`
+    });
+}
+showRanking()
+
+function saveInLocalStorage(dados){
+    localStorage.setItem("rankingSnake", JSON.stringify(dados))
+}
+
+function loadLocalStorage(){
+    const data = localStorage.getItem("rankingSnake")
+    return data ? JSON.parse(data) : []
 }
