@@ -14,6 +14,9 @@ let snake = [{x: 10, y:10}];
 let food = generateFood();
 let randomFood = generateFood()
 let direction = ""
+let gameInterval
+let gameSpeed = 200
+let gameStarted = false;
 
 function createElement(tag, className){
     let element = document.createElement(tag);
@@ -121,4 +124,19 @@ function move(){
     } else {
         snake.pop();
     }
+}
+
+function startGame(){
+    score.classList.toggle('disable', false)
+    scoreLabel.classList.toggle('disable', false)
+    inputName.classList.toggle('disable', true)
+    startPage.classList.toggle('disable', true)
+    ranking.classList.toggle('disable', true)
+    rules.classList.toggle('disable', true)
+
+    gameStarted = true
+    gameInterval = setInterval(() => {
+        draw()
+        move()
+    }, gameSpeed);
 }
