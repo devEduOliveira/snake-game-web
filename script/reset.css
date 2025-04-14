@@ -1,0 +1,45 @@
+:root {
+    --cor-fundo: #2e3b2f;       /* Verde acinzentado - fundo suave */
+    --cor-grade: #3f4d40;       /* Verde mais escuro - grade/borda */
+    --cor-cobra: #00e676;       /* Verde neon suave - corpo da cobra */
+    --cor-cabeca: #00b248;      /* Verde forte - cabeça da cobra */
+    --cor-fruta: #ff7043;       /* Laranja vibrante - fruta */
+    --cor-texto: #f1f8e9;       /* Verde clarinho quase branco - texto */
+    --cor-destaque: #ffee58;    /* Amarelo claro - alertas/destaques */
+  }
+  *{
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow-x: hidden;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'VT323', monospace;
+
+    position: relative;
+    z-index: 1;
+
+    &::after{
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        background: linear-gradient(0deg,rgba(255, 255, 255, 0.51) 1%, rgba(30, 71, 0, 0) 70%);  
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+    
+}
+
+
+
