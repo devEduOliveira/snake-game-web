@@ -13,6 +13,7 @@ const gridSize = 20;
 let snake = [{x: 10, y:10}];
 let food = generateFood();
 let randomFood = generateFood()
+let direction = ""
 
 function createElement(tag, className){
     let element = document.createElement(tag);
@@ -37,11 +38,6 @@ function drawSnake(){
         setPosition(snakeElement, segment);
         gameBoard.appendChild(snakeElement);
     });
-}
-
-function setPosition(element, position){
-    element.style.gridColumn = position.x;
-    element.style.gridRow = position.y;
 }
 
 function drawRandomFood(){
@@ -73,4 +69,56 @@ function generateFood() {
     }
 
     return { x, y };
+}
+
+function setPosition(element, position){
+    element.style.gridColumn = position.x;
+    element.style.gridRow = position.y;
+}
+
+function move(){
+    const head = {...snake[0]}
+    switch (direction) {
+        case 'up':
+            head.y--
+            break;
+
+        case 'down':
+            head.y++
+            break;
+
+        case 'left':
+            head.x--
+            break;
+
+        case 'right':
+            head.x++
+            break;                           
+    }
+    snake.unshift(head)
+
+    if(head.x === food.x && head.y === food.y){
+        eatApple++
+        food = generateFood()
+        clearInterval(gameInterval);
+        gameInterval = setInterval(() => {
+            move()
+            checkCollision()
+            draw()
+            esterEgg()
+        }, gameSpeed);
+    } else if (head.x === randomFood.x && head.y === randomFood.y && snake.length % 2 === 0 && snake.length > 5){
+        eatGoldenApple++
+        randomFood = generateFood()
+        clearInterval(gameInterval);
+        gameSpeed -= Math.floor(Math.random() * 10)
+        gameInterval = setInterval(() => {
+            move()
+            checkCollision()
+            draw()
+            esterEgg()
+        }, gameSpeed);  
+    } else {
+        snake.pop();
+    }
 }
