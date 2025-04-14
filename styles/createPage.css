@@ -29,8 +29,8 @@
             height: 400px;
         
             display: grid;
-            grid-template-columns: repeat(20, 25px);
-            grid-template-rows: repeat(20, 25px);
+            grid-template-columns: repeat(20, 20px);
+            grid-template-rows: repeat(20, 20px);
         
             background-color: var(--cor-fundo);
 
