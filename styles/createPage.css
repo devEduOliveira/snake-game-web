@@ -70,5 +70,41 @@
     
 
 
+    .gameOver{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 530px;
+        height: 530px;
+        overflow: hidden;
 
+        box-shadow: 
+            rgba(0, 0, 0, 0.295)  18px  18px 100px,
+            rgba(0, 0, 0, 0.295) -18px  18px 100px,
+            rgba(0, 0, 0, 0.295)  18px -18px 100px,
+            rgba(0, 0, 0, 0.295) -18px -18px 100px;
+        border: 26px;
+
+        .gameOverTitle{
+            position: absolute;
+            font-size: 32px;
+            color: var(--cor-destaque);
+            bottom: 5%;
+            right: 40%;
+
+            z-index: 99;
+        }
+
+        .logoGameOver{
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            width: 540px;
+            height: 540px;
+            background: url(../assets/gameOver.png);
+            background-position: center;
+            background-size: cover;
+            
+        }
+    }
 }
