@@ -297,3 +297,12 @@ function loadLocalStorage(){
     const data = localStorage.getItem("rankingSnake")
     return data ? JSON.parse(data) : []
 }
+
+function esterEgg() {
+    // make esteregg later
+}
+
+function showModal(){
+    const modal = document.querySelector(".modal")
+    modal.classList.toggle("disable")
+}
