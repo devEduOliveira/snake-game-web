@@ -7,9 +7,11 @@ function createStructure(){
         screenBorder.appendChild(gameBoard);
 
     const startPage = createStartPage();
+    const gameOverPage = createGameOverPage();
 
     containerGame.appendChild(screenBorder)
     containerGame.appendChild(startPage)
+    containerGame.appendChild(gameOverPage)
 }
 
 createStructure()
@@ -30,5 +32,17 @@ function createStartPage(){
     startPage.appendChild(image)
     startPage.appendChild(title)
     return startPage;
+}
+
+function createGameOverPage(){
+    const gameOverPage = createElement("div", "gameOver disable")
+
+    const image = createElement("img", "logoGameOver")
+    const gameOverTitle = createElement("h4", "gameOverTitle")
+    gameOverTitle.innerText = `Score: `
+
+    gameOverPage.appendChild(gameOverTitle)
+    gameOverPage.appendChild(image)
+    return gameOverPage;
 }
 
