@@ -34,6 +34,33 @@
         
             background-color: var(--cor-fundo);
 
+            .snake{
+                background-color: var(--cor-cobra);
+            }
+
+            .snake-head{
+                background-color: var(--cor-cabeca);
+            }
+
+            .snake, .snake-head{
+                width: 80%;
+                height: 80%;
+                padding: 10%;
+            }
+            
+            .food{
+                background: url(../assets/food.png);
+            }
+
+            .foodRandom{
+                background: url(../assets/foodRandom.png);
+            }
+
+            .food, .foodRandom{
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
         }
 
     }
