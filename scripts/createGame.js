@@ -17,6 +17,7 @@ let direction = ""
 let gameInterval
 let gameSpeed = 200
 let gameStarted = false;
+let changeDirection = true
 let highScore = 0
 let eatApple = 0
 let eatGoldenApple = 0
@@ -84,50 +85,46 @@ function setPosition(element, position){
 }
 
 function move(){
+    changeDirection = true
     const head = {...snake[0]}
-    switch (direction) {
-        case 'up':
-            head.y--
-            break;
 
-        case 'down':
-            head.y++
-            break;
-
-        case 'left':
-            head.x--
-            break;
-
-        case 'right':
-            head.x++
-            break;                           
+    const moves = {
+        up: () => head.y--,
+        down: () => head.y ++,
+        left: () => head.x--,
+        right: () => head.x++
     }
+    moves[direction]?.();
+
     snake.unshift(head)
 
-    if(head.x === food.x && head.y === food.y){
-        eatApple++
-        food = generateFood()
-        clearInterval(gameInterval);
-        gameInterval = setInterval(() => {
-            move()
-            checkCollision()
-            draw()
-            esterEgg()
-        }, gameSpeed);
-    } else if (head.x === randomFood.x && head.y === randomFood.y && snake.length % 2 === 0 && snake.length > 5){
-        eatGoldenApple++
-        randomFood = generateFood()
-        clearInterval(gameInterval);
-        gameSpeed -= Math.floor(Math.random() * 10)
-        gameInterval = setInterval(() => {
-            move()
-            checkCollision()
-            draw()
-            esterEgg()
-        }, gameSpeed);  
+    const eatFoodNormal = head.x === food.x && head.y === food.y;
+    const eatFoodRandom = head.x === randomFood.x && head.y === randomFood.y && snake.length % 2 === 0 && snake.length > 5;
+
+    if(eatFoodNormal || eatFoodRandom){
+        if(eatFoodNormal){
+            eatApple++
+            food = generateFood()
+        } else {
+            eatGoldenApple++
+            randomFood = generateFood()
+            gameSpeed -= Math.floor(Math.random() * 10);
+        }
+        
+        resetGameLoop()
     } else {
-        snake.pop();
+        snake.pop()
     }
+}
+
+function resetGameLoop() {
+    clearInterval(gameInterval)
+    gameInterval = setInterval(() => {
+        move()
+        checkCollision()
+        draw()
+        esterEgg()
+    }, gameSpeed)
 }
 
 function startGame(){
@@ -139,48 +136,22 @@ function startGame(){
     rules.classList.toggle('disable', true)
 
     gameStarted = true
-    gameInterval = setInterval(() => {
-        draw()
-        checkCollision()
-        move()
-    }, gameSpeed);
+    resetGameLoop()
 }
 
-function handleKeyPress(event){
-    let name = document.querySelector(".inputName")
-    if(name.value == ""){
-        name.focus()
-    } else {
-        if (!gameStarted && event.code === 'Space'||
-            !gameStarted && event.key === ""
-        ) {
-            startGame()    
-        } else {
-            switch (event.key) {
-                case "ArrowUp":
-                    if(direction != "down"){ 
-                        direction = "up" 
-                    }
-                    break;
-                case "ArrowDown":
-                    if(direction != "up"){ 
-                        direction = "down" 
-                    }
-                    break;
-                case "ArrowRight":
-                    if(direction != "left"){
-                        direction = "right"
-                    }
-                    break;
-                case "ArrowLeft":
-                    if(direction != "right"){
-                        direction = "left"
-                    }
-                    break;
-            }
-        }
-    }
+function handleKeyPress(event) {
+    const name = document.querySelector(".inputName");
+    if (!name.value) return name.focus();
 
+    if (!gameStarted && (event.code === "Space" || event.key === "")) return startGame();
+
+    const opposite = { ArrowUp: "down", ArrowDown: "up", ArrowRight: "left", ArrowLeft: "right" };
+    const newDir = event.key;
+
+    if (opposite[newDir] && direction !== opposite[newDir] && changeDirection) {
+        direction = newDir.slice(5).toLowerCase();
+        changeDirection = false;
+    }
 }
 
 function activeKeyDown() {
@@ -244,8 +215,6 @@ function stopGame(){
     clearInterval(gameInterval)
     gameStarted = false;
     countEsterEgg = 0
-    console.log(eatApple);
-    
 }
 
 function updateHighScore(){

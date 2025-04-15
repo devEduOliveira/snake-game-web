@@ -294,14 +294,14 @@
                 rgba(63, 63, 63, 0.25) 0px -30px 100px,
                 rgba(63, 63, 63, 0.25) 30px 0px 100px,
                 rgba(63, 63, 63, 0.25) -30px 0px 100px;
-        width: 500px;
-        height: 700px;
+        width: 350px;
+        height: 560px;
         border-radius: 29px;
         border: 10px solid var(--cor-grade);
         padding: 0 20px;
 
         .modalRules{
-            font-size: 28px;
+            font-size: 23px;
             color: var(--cor-texto);
         }
 
@@ -315,6 +315,7 @@
             border-bottom: 5px solid var(--cor-grade);
         }
         .closeModal{
+            cursor: pointer;
             position: absolute;
             top: 20px;
             right: 20px;
