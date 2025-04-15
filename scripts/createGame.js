@@ -90,7 +90,7 @@ function move(){
 
     const moves = {
         up: () => head.y--,
-        down: () => head.y ++,
+        down: () => head.y++,
         left: () => head.x--,
         right: () => head.x++
     }
